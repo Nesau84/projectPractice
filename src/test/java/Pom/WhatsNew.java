@@ -3,15 +3,16 @@ package Pom;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class WhatsNew {
 
     public WhatsNew(WebDriver driver) {
 
-        PageFactory.initElements(driver, this);
+        initElements(driver, this);
     }
 
     @FindBy(css = "ul[role='menu'] li[class='level0 nav-1 category-item first level-top ui-menu-item']")
