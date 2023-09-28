@@ -29,7 +29,7 @@ public class BaseClass extends DriverFactory {
 
         log.info("Setup is initializing driver");
 
-        driver.navigate().to(PropertiesReader.properties.getProperty("url"));
+        driver.get().navigate().to(PropertiesReader.properties.getProperty("url"));
 
         log.info("Before test started.");
     }
@@ -37,13 +37,13 @@ public class BaseClass extends DriverFactory {
     @AfterTest
     public void afterTest() {
 
-        driver.quit();
-
+        driver.get().quit();
         log.info("Quitting driver instance");
     }
 
     @AfterClass
     public void afterClass() {
+
 
         log.info("Tests closing");
     }

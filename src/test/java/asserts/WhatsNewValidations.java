@@ -28,13 +28,13 @@ public class WhatsNewValidations {
         assertEquals("Url mismatch", expectedUrl, actualUrl);
     }
 
-    public void assertNewWomansMenuItems() {
+    public void assertNewMenuItems(boolean isWoman) {
 
-        List<String> elementsList = whatsNew.newInWomansElements.stream().map(WebElement::getText).toList();
-        List<String> expectedElements = List.of("Hoodies & Sweatshirts", "Jackets", "Tees", "Bras & Tanks", "Pants", "Shorts");
+        List<String> elementsList = isWoman ? whatsNew.newInWomansElements.stream().map(WebElement::getText).toList() :
+                whatsNew.newInMensElements.stream().map(WebElement::getText).toList();
+        List<String> expectedElements = List.of("Hoodies & Sweatshirts", "Jackets", "Tees", (isWoman ? "Bras & Tanks" : "Tanks"), "Pants", "Shorts");
 
         assertEquals(expectedElements.size(), elementsList.size());
-
-        IntStream.range(0, elementsList.size()).forEach(i -> assertEquals(whatsNew.newInWomansElements.get(i).getText(), expectedElements.get(i)));
+        IntStream.range(0, expectedElements.size()).forEach(i -> assertEquals(elementsList.get(i), expectedElements.get(i)));
     }
 }

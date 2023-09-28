@@ -1,5 +1,6 @@
 package tests;
 
+import DataProviders.WhatsNewMenuDataProvider;
 import asserts.WhatsNewValidations;
 import methods.WhatsNewMethods;
 import org.testng.annotations.*;
@@ -21,8 +22,8 @@ public class WhatsNewTests extends BaseClass {
 
         super.beforeTest();
 
-        whatsNewMethods.set(new WhatsNewMethods(driver));
-        whatsNewValidations.set(new WhatsNewValidations(driver));
+        whatsNewMethods.set(new WhatsNewMethods(driver.get()));
+        whatsNewValidations.set(new WhatsNewValidations(driver.get()));
     }
 
     @Test
@@ -32,11 +33,12 @@ public class WhatsNewTests extends BaseClass {
         whatsNewValidations.get().assertWhatsNewPageAccessed();
     }
 
-    @Test
-    public void verifyContentsAllWomansCollection() {
+    @Test(dataProvider = "whatsNewMenuBoolProvider"
+            ,dataProviderClass = WhatsNewMenuDataProvider.class)
+    public void verifyContentsCollection(Boolean booleanValue) {
 
         whatsNewMethods.get().openWhatsNewMenu();
-        whatsNewValidations.get().assertNewWomansMenuItems();
+        whatsNewValidations.get().assertNewMenuItems(booleanValue);
     }
 
     @AfterMethod
