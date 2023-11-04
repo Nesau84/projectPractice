@@ -5,22 +5,28 @@ import dataProviders.WhatsNewMenuDataProvider;
 import methods.WhatsNewMethods;
 import org.testng.annotations.*;
 import pretests.BaseClass;
+import ru.yandex.qatools.allure.annotations.Severity;
+import testResources.TestGroups;
 
-import static locators.mainPage.MainMenuNavigation.WHATS_NEW;
-import static locators.mainPage.MainMenuNavigation.navigateToMenuOption;
+import static locators.mainPage.MainPageElements.WHATS_NEW;
+import static ru.yandex.qatools.allure.model.SeverityLevel.BLOCKER;
+import static ru.yandex.qatools.allure.model.SeverityLevel.CRITICAL;
+import static testResources.NavigationUtils.navigateToMenuOption;
 
 public class WhatsNewTests extends BaseClass {
 
-    ThreadLocal<WhatsNewMethods> whatsNewMethods = new ThreadLocal<>();
-    ThreadLocal<WhatsNewValidations> whatsNewValidations = new ThreadLocal<>();
+    private final ThreadLocal<WhatsNewMethods> whatsNewMethods = new ThreadLocal<>();
+    private final ThreadLocal<WhatsNewValidations> whatsNewValidations = new ThreadLocal<>();
 
     @BeforeClass(alwaysRun = true)
+    @Severity(BLOCKER)
     public void beforeClass() {
 
         super.beforeClass();
     }
 
     @BeforeMethod(alwaysRun = true)
+    @Severity(BLOCKER)
     public void beforeTest() {
 
         super.beforeTest();
@@ -29,28 +35,45 @@ public class WhatsNewTests extends BaseClass {
         whatsNewValidations.set(new WhatsNewValidations(driver.get()));
     }
 
-    @Test
+    @Test(groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+    @Severity(CRITICAL)
     public void checkWhatsNewPageLinkWorking() {
 
-        navigateToMenuOption(driver.get(), WHATS_NEW.getLocator());
+        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName());
+
         whatsNewValidations.get().assertWhatsNewPageAccessed();
     }
 
     @Test(dataProvider = "whatsNewMenuBoolProvider"
             ,dataProviderClass = WhatsNewMenuDataProvider.class)
+    @Severity(CRITICAL)
     public void verifyContentsCollection(Boolean booleanValue) {
 
-        navigateToMenuOption(driver.get(), WHATS_NEW.getLocator());
+        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName() );
+
         whatsNewValidations.get().assertNewMenuItems(booleanValue);
     }
 
+    @Test(groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+    @Severity(CRITICAL)
+    public void verifyCompareProductsDefaultState() {
+
+        String expectedText = "You have no items to compare.";
+
+        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName());
+
+        whatsNewValidations.get().assertCompareProductsDefaultState(expectedText);
+    }
+
     @AfterMethod
+    @Severity(BLOCKER)
     public void afterTest() {
 
         super.afterTest();
     }
 
     @AfterClass
+    @Severity(BLOCKER)
     public void afterClass() {
 
         super.afterClass();

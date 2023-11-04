@@ -31,13 +31,12 @@ public class BaseClass extends DriverFactory {
     @AfterTest
     public void afterTest() {
 
-        driver.get().quit();
         log.info("Quitting driver instance");
+        driver.get().quit();
     }
 
     @AfterClass
     public void afterClass() {
-
 
         log.info("Tests closing");
     }

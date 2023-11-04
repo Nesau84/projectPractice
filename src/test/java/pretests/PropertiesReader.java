@@ -20,7 +20,7 @@ public class PropertiesReader {
         try {
             properties.load(url.openStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.severe(e.getMessage());
         }
     }
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static org.openqa.selenium.By.cssSelector;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class WhatsNewValidations {
@@ -36,5 +37,15 @@ public class WhatsNewValidations {
 
         assertEquals(expectedElements.size(), elementsList.size());
         IntStream.range(0, expectedElements.size()).forEach(i -> assertEquals(elementsList.get(i), expectedElements.get(i)));
+    }
+
+    public void assertCompareProductsDefaultState(String expectedText) {
+
+        assertEquals("Text mismatch.", expectedText, compareProductsTextHelper());
+    }
+
+    private String compareProductsTextHelper() {
+
+        return whatsNew.compareProductsElement.findElement(cssSelector(" .empty")).getText();
     }
 }
