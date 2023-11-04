@@ -1,4 +1,4 @@
-package Pom;
+package locators.mainPage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,9 +14,6 @@ public class WhatsNew {
 
         initElements(driver, this);
     }
-
-    @FindBy(css = "ul[role='menu'] li[class='level0 nav-1 category-item first level-top ui-menu-item']")
-    public WebElement whatsNewElement;
 
     @FindBy(xpath = "//div[@class='categories-menu']//strong/span[contains(text(),'New in women')]/following::ul[1]//li")
     public List<WebElement> newInWomansElements;

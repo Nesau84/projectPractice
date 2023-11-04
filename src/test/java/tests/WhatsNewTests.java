@@ -1,10 +1,13 @@
 package tests;
 
-import DataProviders.WhatsNewMenuDataProvider;
 import asserts.WhatsNewValidations;
+import dataProviders.WhatsNewMenuDataProvider;
 import methods.WhatsNewMethods;
 import org.testng.annotations.*;
 import pretests.BaseClass;
+
+import static locators.mainPage.MainMenuNavigation.WHATS_NEW;
+import static locators.mainPage.MainMenuNavigation.navigateToMenuOption;
 
 public class WhatsNewTests extends BaseClass {
 
@@ -29,7 +32,7 @@ public class WhatsNewTests extends BaseClass {
     @Test
     public void checkWhatsNewPageLinkWorking() {
 
-        whatsNewMethods.get().openWhatsNewMenu();
+        navigateToMenuOption(driver.get(), WHATS_NEW.getLocator());
         whatsNewValidations.get().assertWhatsNewPageAccessed();
     }
 
@@ -37,7 +40,7 @@ public class WhatsNewTests extends BaseClass {
             ,dataProviderClass = WhatsNewMenuDataProvider.class)
     public void verifyContentsCollection(Boolean booleanValue) {
 
-        whatsNewMethods.get().openWhatsNewMenu();
+        navigateToMenuOption(driver.get(), WHATS_NEW.getLocator());
         whatsNewValidations.get().assertNewMenuItems(booleanValue);
     }
 

@@ -5,11 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
+
+import static java.time.temporal.ChronoUnit.MILLIS;
 
 public class DriverFactory {
 
-   public ThreadLocal<WebDriver>driver = new ThreadLocal<>();
+    protected ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public void setDriver() {
 
@@ -25,6 +26,6 @@ public class DriverFactory {
 
     public void setImplicitWait() {
 
-        driver.get().manage().timeouts().implicitlyWait(Duration.of(2000, ChronoUnit.MILLIS));
+        driver.get().manage().timeouts().implicitlyWait(Duration.of(2000, MILLIS));
     }
 }
