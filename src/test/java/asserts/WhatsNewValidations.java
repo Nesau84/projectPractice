@@ -1,6 +1,6 @@
 package asserts;
 
-import Pom.WhatsNew;
+import locators.mainPage.WhatsNew;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
