@@ -6,8 +6,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
-import static pretests.PropertiesReader.getInformationFromProperties;
-import static pretests.PropertiesReader.initLoader;
+import static pretests.PropertiesReader.*;
 
 @Log
 public class BaseClass extends DriverFactory {
@@ -15,23 +14,18 @@ public class BaseClass extends DriverFactory {
     @BeforeClass
     public void beforeClass() {
 
+        initLoader();
+        getInformationFromProperties();
     }
 
     @BeforeTest
     public void beforeTest() {
 
-        initLoader();
-        getInformationFromProperties();
-
         setDriver();
         setScreen();
         setImplicitWait();
 
-        log.info("Setup is initializing driver");
-
-        driver.get().navigate().to(PropertiesReader.properties.getProperty("url"));
-
-        log.info("Before test started.");
+        driver.get().navigate().to(properties.getProperty("url"));
     }
 
     @AfterTest

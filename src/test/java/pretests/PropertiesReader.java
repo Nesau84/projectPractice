@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+import static java.lang.ClassLoader.getSystemResource;
 import static java.lang.String.format;
 
 @Log
 public class PropertiesReader {
 
     static Properties properties = new Properties();
-    static URL url = ClassLoader.getSystemResource("Application.properties");
+    static URL url = getSystemResource("Application.properties");
 
     public static void initLoader() {
 

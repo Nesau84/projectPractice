@@ -11,8 +11,8 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class WhatsNewValidations {
 
-    WebDriver driver;
-    WhatsNew whatsNew;
+    private final WebDriver driver;
+    private final WhatsNew whatsNew;
 
     public WhatsNewValidations(WebDriver driver) {
 
