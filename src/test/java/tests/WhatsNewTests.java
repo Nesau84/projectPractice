@@ -35,7 +35,8 @@ public class WhatsNewTests extends BaseClass {
         whatsNewValidations.set(new WhatsNewValidations(driver.get()));
     }
 
-    @Test(groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+    @Test(description = "Basic check if clicking on What's new page link is working",
+            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
     @Severity(CRITICAL)
     public void checkWhatsNewPageLinkWorking() {
 
@@ -44,17 +45,20 @@ public class WhatsNewTests extends BaseClass {
         whatsNewValidations.get().assertWhatsNewPageAccessed();
     }
 
-    @Test(dataProvider = "whatsNewMenuBoolProvider"
-            ,dataProviderClass = WhatsNewMenuDataProvider.class)
+    @Test(description = "Check if Collection contains everything for both Male/Female sections",
+            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW },
+            dataProvider = "whatsNewMenuBoolProvider",
+            dataProviderClass = WhatsNewMenuDataProvider.class)
     @Severity(CRITICAL)
     public void verifyContentsCollection(Boolean booleanValue) {
 
-        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName() );
+        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName());
 
         whatsNewValidations.get().assertNewMenuItems(booleanValue);
     }
 
-    @Test(groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+    @Test(description = "Verify default state of Compare Products",
+            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
     @Severity(CRITICAL)
     public void verifyCompareProductsDefaultState() {
 
@@ -62,8 +66,22 @@ public class WhatsNewTests extends BaseClass {
 
         navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName());
 
-        whatsNewValidations.get().assertCompareProductsDefaultState(expectedText);
+        whatsNewValidations.get().assertCompareProductsDefaultStateText(expectedText);
     }
+
+    @Test(description = "Verify default state of My Wish List",
+            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+    @Severity(CRITICAL)
+    public void verifyMyWishListDefaultState() {
+
+        String expectedText = "You have no items in your wish list.";
+
+        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName());
+
+        whatsNewValidations.get().assertMyWishListDefaultStateText(expectedText);
+    }
+
+    //TODO - Assert 4 products are displayed test
 
     @AfterMethod
     @Severity(BLOCKER)

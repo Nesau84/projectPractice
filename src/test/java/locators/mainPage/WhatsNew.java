@@ -26,4 +26,7 @@ public class WhatsNew {
 
     @FindBy(css = ".block-compare")
     public WebElement compareProductsElement;
+
+    @FindBy(css = ".block-wishlist .block-content")
+    public WebElement myWishListElement;
 }

@@ -39,13 +39,20 @@ public class WhatsNewValidations {
         IntStream.range(0, expectedElements.size()).forEach(i -> assertEquals(elementsList.get(i), expectedElements.get(i)));
     }
 
-    public void assertCompareProductsDefaultState(String expectedText) {
+    public void assertCompareProductsDefaultStateText(String expectedText) {
 
-        assertEquals("Text mismatch.", expectedText, compareProductsTextHelper());
+        assertEquals("Text mismatch.", expectedText, defaultStateTextHelper(true));
     }
 
-    private String compareProductsTextHelper() {
+    public void assertMyWishListDefaultStateText(String expectedText) {
 
-        return whatsNew.compareProductsElement.findElement(cssSelector(" .empty")).getText();
+        assertEquals("Text mismatch", expectedText, defaultStateTextHelper(false));
+    }
+
+    private String defaultStateTextHelper(boolean isCompareProducts) {
+
+        WebElement textElement = isCompareProducts? whatsNew.compareProductsElement : whatsNew.myWishListElement;
+
+        return textElement.findElement(cssSelector(" .empty")).getText();
     }
 }
