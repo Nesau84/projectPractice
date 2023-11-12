@@ -1,19 +1,11 @@
-package locators.mainPage;
+package containers;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.PageFactory.initElements;
-
 public class WhatsNew {
-
-    public WhatsNew(WebDriver driver) {
-
-        initElements(driver, this);
-    }
 
     @FindBy (css = ".base")
     public static WebElement pageHolderElement;

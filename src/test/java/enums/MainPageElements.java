@@ -1,4 +1,4 @@
-package locators.mainPage;
+package enums;
 
 public enum MainPageElements {
 

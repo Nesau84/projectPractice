@@ -1,15 +1,20 @@
 package pretests;
 
+import containers.WhatsNew;
 import lombok.extern.java.Log;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import testResources.Container;
 
+import static org.openqa.selenium.support.PageFactory.initElements;
 import static pretests.PropertiesReader.*;
 
 @Log
 public class BaseClass extends DriverFactory {
+
+    public final ThreadLocal<Container> container = new ThreadLocal<>();
 
     @BeforeClass
     public void beforeClass() {
@@ -22,6 +27,7 @@ public class BaseClass extends DriverFactory {
     public void beforeTest() {
 
         setDriver();
+        containerInit();
         setScreen();
         setImplicitWait();
 
@@ -39,5 +45,13 @@ public class BaseClass extends DriverFactory {
     public void afterClass() {
 
         log.info("Tests closing");
+    }
+
+    private void containerInit() {
+
+        Container containerLocal = new Container();
+
+        containerLocal.setWhatsNew(initElements(driver.get(), WhatsNew.class));
+        container.set(containerLocal);
     }
 }

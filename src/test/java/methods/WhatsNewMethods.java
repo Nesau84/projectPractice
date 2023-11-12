@@ -1,16 +1,17 @@
 package methods;
 
-import locators.mainPage.WhatsNew;
+import containers.WhatsNew;
 import org.openqa.selenium.WebDriver;
+import testResources.Container;
 
 public class WhatsNewMethods {
 
     WebDriver driver;
     WhatsNew whatsNew;
 
-    public WhatsNewMethods(WebDriver driver) {
+    public WhatsNewMethods(Container container, WebDriver driver) {
 
-        this.whatsNew = new WhatsNew(driver);
         this.driver = driver;
+        this.whatsNew = container.getWhatsNew();
     }
 }

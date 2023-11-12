@@ -1,8 +1,9 @@
 package asserts;
 
-import locators.mainPage.WhatsNew;
+import containers.WhatsNew;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import testResources.Container;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -12,12 +13,12 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class WhatsNewValidations {
 
-    private final WebDriver driver;
     private final WhatsNew whatsNew;
+    private final WebDriver driver;
 
-    public WhatsNewValidations(WebDriver driver) {
+    public WhatsNewValidations(Container container, WebDriver driver) {
 
-        this.whatsNew = new WhatsNew(driver);
+        this.whatsNew = container.getWhatsNew();
         this.driver = driver;
     }
 

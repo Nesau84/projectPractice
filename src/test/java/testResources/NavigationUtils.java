@@ -5,7 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import static java.lang.String.format;
-import static locators.mainPage.WhatsNew.pageHolderElement;
+import static containers.WhatsNew.pageHolderElement;
 import static org.openqa.selenium.By.id;
 
 @Log

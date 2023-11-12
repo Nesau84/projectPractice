@@ -8,7 +8,7 @@ import pretests.BaseClass;
 import ru.yandex.qatools.allure.annotations.Severity;
 import testResources.TestGroups;
 
-import static locators.mainPage.MainPageElements.WHATS_NEW;
+import static enums.MainPageElements.WHATS_NEW;
 import static ru.yandex.qatools.allure.model.SeverityLevel.BLOCKER;
 import static ru.yandex.qatools.allure.model.SeverityLevel.CRITICAL;
 import static testResources.NavigationUtils.navigateToMenuOption;
@@ -31,8 +31,8 @@ public class WhatsNewTests extends BaseClass {
 
         super.beforeTest();
 
-        whatsNewMethods.set(new WhatsNewMethods(driver.get()));
-        whatsNewValidations.set(new WhatsNewValidations(driver.get()));
+        whatsNewMethods.set(new WhatsNewMethods(container.get(), driver.get()));
+        whatsNewValidations.set(new WhatsNewValidations(container.get(), driver.get()));
     }
 
     @Test(description = "Basic check if clicking on What's new page link is working",
