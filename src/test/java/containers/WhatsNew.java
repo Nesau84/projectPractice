@@ -21,4 +21,7 @@ public class WhatsNew {
 
     @FindBy(css = ".block-wishlist .block-content")
     public WebElement myWishListElement;
+
+    @FindBy(css = ".block-wishlist .block-content")
+    public WebElement findByRevert;
 }
