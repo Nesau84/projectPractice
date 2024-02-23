@@ -6,6 +6,7 @@ import methods.WhatsNewMethods;
 import org.testng.annotations.*;
 import pretests.BaseClass;
 import ru.yandex.qatools.allure.annotations.Severity;
+import testResources.NavigationUtils;
 import testResources.TestGroups;
 
 import static enums.MainPageElements.WHATS_NEW;
@@ -36,7 +37,7 @@ public class WhatsNewTests extends BaseClass {
     }
 
     @Test(description = "Basic check if clicking on What's new page link is working",
-            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+            groups = {TestGroups.SANITY, TestGroups.WHATS_NEW})
     @Severity(CRITICAL)
     public void checkWhatsNewPageLinkWorking() {
 
@@ -46,7 +47,7 @@ public class WhatsNewTests extends BaseClass {
     }
 
     @Test(description = "Check if Collection contains everything for both Male/Female sections",
-            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW },
+            groups = {TestGroups.SANITY, TestGroups.WHATS_NEW},
             dataProvider = "whatsNewMenuBoolProvider",
             dataProviderClass = WhatsNewMenuDataProvider.class)
     @Severity(CRITICAL)
@@ -58,7 +59,7 @@ public class WhatsNewTests extends BaseClass {
     }
 
     @Test(description = "Verify default state of Compare Products",
-            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+            groups = {TestGroups.SANITY, TestGroups.WHATS_NEW})
     @Severity(CRITICAL)
     public void verifyCompareProductsDefaultState() {
 
@@ -70,7 +71,7 @@ public class WhatsNewTests extends BaseClass {
     }
 
     @Test(description = "Verify default state of My Wish List",
-            groups = { TestGroups.SANITY, TestGroups.WHATS_NEW })
+            groups = {TestGroups.SANITY, TestGroups.WHATS_NEW})
     @Severity(CRITICAL)
     public void verifyMyWishListDefaultState() {
 
@@ -81,16 +82,35 @@ public class WhatsNewTests extends BaseClass {
         whatsNewValidations.get().assertMyWishListDefaultStateText(expectedText);
     }
 
-    //TODO - Assert 4 products are displayed test
+    //TODO to be moved to "general tests"
+    @Test(description = "Verify 4 products are displayed by default",
+            groups = {TestGroups.SANITY},
+            dataProvider = "pagesToNavigate",
+            dataProviderClass = WhatsNewMenuDataProvider.class)
+    @Severity(CRITICAL)
+    public void verifyDefaultProductCountForEachPage(String pageElement, String name, int expectedCount) {
 
-    @AfterMethod
+        navigateToMenuOption(driver.get(), pageElement, name);
+        whatsNewValidations.get().assertDefaultNumberOfProductsDisplayed(expectedCount);
+    }
+
+    @Test(description = "Verify pricing for default displayed products",
+    groups = {TestGroups.SANITY, TestGroups.WHATS_NEW})
+    public void verifyPricingForDefaultPageProducts() {
+
+        navigateToMenuOption(driver.get(), WHATS_NEW.getPageElement(), WHATS_NEW.getName());
+        whatsNewValidations.get().assertDefaultProductPricing(192);
+    }
+
+    @AfterMethod(alwaysRun = true)
     @Severity(BLOCKER)
+
     public void afterTest() {
 
         super.afterTest();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     @Severity(BLOCKER)
     public void afterClass() {
 
